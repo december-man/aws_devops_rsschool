@@ -10,6 +10,7 @@ env:
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   GHA_ROLE: ${{ secrets.GHA_ROLE }}
   REGION: ${{ secrets.REGION }}
+  TERRAFORM_VERSION: ${{ secrets.TERRAFORM_VERSION }}
 
 permissions:
   id-token: write
@@ -21,6 +22,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.REGION  }}
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.GHA_ROLE }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }} # Add version flexibility
       
       - name: Terraform init # S3 backend init     
         run: terraform init
