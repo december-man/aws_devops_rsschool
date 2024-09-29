@@ -1,0 +1,6 @@
+# Exclude hidden terraform files
+*.terraform*
+# Exclude terraform state files
+*terraform.tfstate*
+# Exclude terraform variables file
+*.tfvars*
