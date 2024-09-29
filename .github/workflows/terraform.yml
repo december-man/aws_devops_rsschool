@@ -58,5 +58,5 @@ jobs:
           key: terraform-cache-${{ runner.os }}-${{ github.run_id }}
           fail-on-cache-miss: true
           
-      - name: Terraform Plan
+      - name: Terraform Check
         run: terraform fmt
