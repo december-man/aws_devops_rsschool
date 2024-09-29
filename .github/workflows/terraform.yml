@@ -6,6 +6,17 @@ on:
     branches:
       - task_1
 
+env:
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+  GHA_ROLE: ${{ secrets.GHA_ROLE }}
+  REGION: ${{ secrets.REGION }}
+  TERRAFORM_VERSION: ${{ secrets.TERRAFORM_VERSION }}
+
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   terraform_init:
     runs-on: ubuntu-latest
@@ -16,13 +27,19 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: eu-central-1
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.TERRAFORM_GITHUB_ACTIONS_ROLE_NAME }}
+          aws-region: ${{ env.REGION  }}
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.GHA_ROLE }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.9.6
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
 
       - name: Terraform Init
         run: terraform init
+
+      - name: Create terraform cache
+        uses: actions/cache/save@v4
+        with:
+          path: .terraform*
+          key: terraform-cache-${{ runner.os }}-${{ github.run_id }}
