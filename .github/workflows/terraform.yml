@@ -8,10 +8,8 @@ on:
 
 env:
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-  BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
   GHA_ROLE: ${{ secrets.GHA_ROLE }}
   REGION: ${{ secrets.REGION }}
-  TERRAFORM_VERSION: ${{ secrets.TERRAFORM_VERSION }}
 
 permissions:
   id-token: write
@@ -23,12 +21,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Create terraform cache
-        uses: actions/cache/save@v4
-        with:
-          path: .terraform*
-          key: terraform-cache-${{ runner.os }}-${{ github.run_id }}
           
       - name: Terraform Check
         run: terraform fmt
@@ -39,13 +31,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Restore terraform cache
-        uses: actions/cache/restore@v4
-        with:
-          path: .terraform*
-          key: terraform-cache-${{ runner.os }}-${{ github.run_id }}
-          fail-on-cache-miss: true
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -62,13 +47,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Restore terraform cache
-        uses: actions/cache/restore@v4
-        with:
-          path: .terraform*
-          key: terraform-cache-${{ runner.os }}-${{ github.run_id }}
-          fail-on-cache-miss: true
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
