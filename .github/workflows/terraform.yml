@@ -21,7 +21,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-          
+      
+      - name: Terraform init # S3 backend init     
+        run: terraform init
+
       - name: Terraform Check
         run: terraform fmt
 
