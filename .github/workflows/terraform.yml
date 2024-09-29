@@ -37,6 +37,12 @@ jobs:
       - name: Terraform init # S3 backend init     
         run: terraform init
 
+      - name: Create terraform cache
+        uses: actions/cache/save@v4
+        with:
+          path: .terraform*
+          key: terraform-cache-${{ runner.os }}-${{ github.run_id }}
+
       - name: Terraform Check
         run: terraform fmt
 
@@ -53,6 +59,13 @@ jobs:
           aws-region: ${{ env.REGION  }}
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.GHA_ROLE }}
 
+      - name: Restore terraform cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .terraform*
+          key: terraform-cache-${{ runner.os }}-${{ github.run_id }}
+          fail-on-cache-miss: true
+
       - name: Terraform Plan
         run: terraform plan -input=false
 
@@ -68,6 +81,13 @@ jobs:
         with:
           aws-region: ${{ env.REGION  }}
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.GHA_ROLE }}
+
+      - name: Restore terraform cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .terraform*
+          key: terraform-cache-${{ runner.os }}-${{ github.run_id }}
+          fail-on-cache-miss: true
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
