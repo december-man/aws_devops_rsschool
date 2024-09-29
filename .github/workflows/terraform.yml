@@ -24,12 +24,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Restore terraform cache
-        uses: actions/cache/restore@v4
+      - name: Create terraform cache
+        uses: actions/cache/save@v4
         with:
           path: .terraform*
           key: terraform-cache-${{ runner.os }}-${{ github.run_id }}
-          fail-on-cache-miss: true
           
       - name: Terraform Check
         run: terraform fmt
