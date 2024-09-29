@@ -1,15 +1,3 @@
-variable "bucket_name" {
-  description = "Backend S3 bucket"
-  type        = string
-  default     = "aws-devops-terraform-backend"
-}
-
-variable "region" {
-  description = "AWS region"
-  type        = string
-  default     = "eu-central-1"
-}
-
 variable "gha_role" {
   description = "IAM role used by GitHub Actions"
   type        = string
@@ -27,6 +15,6 @@ variable "iam_policies" {
     "arn:aws:iam::aws:policy/AmazonVPCFullAccess",
     "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
     "arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess",
-    "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+    "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess" # For future dynamodb setup of S3 backend
   ]
 }
