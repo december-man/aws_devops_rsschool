@@ -1,11 +1,13 @@
 variable "bucket_name" {
    description = "Backend S3 bucket"
-   type = string
+   type        = string
+   default     = "aws-devops-terraform-backend"
 }
 
 variable "region" {
    description = "AWS region"
-   type = string
+   type        = string
+   default     = "eu-central-1"
 }
 
 variable "gha_role" {

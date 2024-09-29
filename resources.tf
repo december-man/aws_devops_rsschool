@@ -2,7 +2,7 @@
 resource "aws_iam_openid_connect_provider" "gha_oidc" {
   url = "https://token.actions.githubusercontent.com"
   client_id_list = ["sts.amazonaws.com"]
-  thumbrint_list = ["ffffffffffffffffffffffffffffffffffffffff"] # not required
+  thumbprint_list = ["ffffffffffffffffffffffffffffffffffffffff"] # not required
 }
 
 # Prepare OIDC policy
@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "oidc_policy" {
 # Create Role
 resource "aws_iam_role" "terraform_gha_role" {
   name               = var.gha_role
-  assume_role_policy = data.aws_iam_policy_document.gha_assume_role_policy.json
+  assume_role_policy = data.aws_iam_policy_document.oidc_policy.json
 }
 
 # Attach Policies to the role
