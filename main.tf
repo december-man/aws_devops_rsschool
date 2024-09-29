@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "s3" {
-     bucket         = var.bucket_name
+     bucket         = "aws-devops-terraform-backend"
      key            = "terraform.tfstate"
-     region         = var.region
+     region         = "eu-central-1"
      encrypt        = "true"
   }
 }
