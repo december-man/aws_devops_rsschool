@@ -15,7 +15,7 @@ variable "gha_role" {
 }
 
 variable "iam_policies" {
-  description = "The List of Required IAM Policies"
+  description = "List of Required IAM Policies"
   type        = list(string)
   default = [
     "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
@@ -24,6 +24,7 @@ variable "iam_policies" {
     "arn:aws:iam::aws:policy/IAMFullAccess",
     "arn:aws:iam::aws:policy/AmazonVPCFullAccess",
     "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
-    "arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess"
+    "arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess",
+    "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
   ]
 }
