@@ -1,6 +1,6 @@
 variable "region" {
- description = "AWS Region"
- type        = string
+  description = "AWS Region"
+  type        = string
 }
 
 variable "gha_role" {
