@@ -2,9 +2,8 @@ name: Terraform
 
 on:
   pull_request:
-  push:
     branches:
-      - task_1
+      - main
 
 env:
   TF_VAR_region: ${{ secrets.REGION }}
