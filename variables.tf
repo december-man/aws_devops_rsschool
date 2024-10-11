@@ -66,7 +66,7 @@ variable "ec2_amazon_linux_ami" {
   default = "ami-0592c673f0b1e7665"
 }
 
-variable "ssh_pubkey_file" {
-  description = "Path to an SSH public key"
-  default     = "~/.ssh/aws/key.pub"
+variable "ssh_pk" {
+  description = "SSH Public Key to connect to Bastion Host"
+  type        = string
 }
