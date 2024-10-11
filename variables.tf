@@ -1,3 +1,8 @@
+variable "region" {
+ description = "AWS Region"
+ type        = string
+}
+
 variable "gha_role" {
   description = "IAM role used by GitHub Actions"
   type        = string
