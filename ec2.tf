@@ -24,6 +24,7 @@ resource "aws_instance" "nat_instance" {
               sudo /sbin/iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
               sudo /sbin/iptables -F FORWARD
               EOF
+  user_data_replace_on_change = true
 }
 
 # Create a Test EC2 instance in Private nerwork to check all the routing
