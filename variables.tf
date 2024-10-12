@@ -70,3 +70,8 @@ variable "ssh_pk" {
   description = "SSH Public Key to connect to Bastion Host"
   type        = string
 }
+
+variable "ssh_inbound_ip" {
+  description = "Specify CIDR block to limit inbound ssh traffic to the NAT Instance/Bastion Host"
+  default     = ["0.0.0.0/0"] 
+}
