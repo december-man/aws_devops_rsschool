@@ -31,7 +31,25 @@ resource "aws_security_group_rule" "ingress_icmp" {
   protocol          = "icmp"
 }
 
-# Any Private inbound traffic within VPC is allowed by default.
+resource "aws_security_group_rule" "ingress_private_subnet_1" {
+  description       = "Allow all private subnet 1 inbound traffic to NAT Instance / Bastion Host"
+  security_group_id = aws_security_group.nat_sg.id
+  type              = "ingress"
+  cidr_blocks       = [var.private_subnet_1_cidr]
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+}
+
+resource "aws_security_group_rule" "ingress_private_subnet_2" {
+  description       = "Allow all private subnet 2 inbound traffic to NAT Instance / Bastion Host"
+  security_group_id = aws_security_group.nat_sg.id
+  type              = "ingress"
+  cidr_blocks       = [var.private_subnet_2_cidr]
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+}
 
 # Add Egress Rulee to allow all outbound traffic
 resource "aws_security_group_rule" "egress_any" {
