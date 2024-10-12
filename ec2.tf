@@ -4,7 +4,6 @@
 resource "aws_instance" "nat_instance" {
   ami                    = var.ec2_amazon_linux_ami
   instance_type          = "t2.micro"
-  subnet_id              = aws_subnet.public_subnet_1.id
   vpc_security_group_ids = [aws_security_group.nat_sg.id]
   key_name               = aws_key_pair.ssh_key.key_name
   tags = {
