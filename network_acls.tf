@@ -53,10 +53,20 @@ resource "aws_network_acl_rule" "ingress_https" {
   to_port        = 443
 }
 
+# Allow all inbound traffic
+resource "aws_network_acl_rule" "ingress_allow_all" {
+  network_acl_id = aws_network_acl.public_acl.id
+  rule_number    = 200  # Choose a rule number that is higher than existing rules
+  egress         = false
+  protocol       = "-1"  # -1 means all protocols
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+}
+
 # Add egress rule to Public ACL to allow all outbound traffic
 resource "aws_network_acl_rule" "egress_all" {
   network_acl_id = aws_network_acl.public_acl.id
-  rule_number    = 200
+  rule_number    = 201
   egress         = true
   protocol       = "-1" # All protocols allowed
   rule_action    = "allow"
