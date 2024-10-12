@@ -1,7 +1,7 @@
 # Task 2: Networking Resources
 
 # Deploy Public Subnets
-resource "aws_subnet" "public_subnet_1" { 
+resource "aws_subnet" "public_subnet_1" {
   tags = {
     Name = "aws-devops-terraform-public-subnet-1"
   }
@@ -11,7 +11,7 @@ resource "aws_subnet" "public_subnet_1" {
   map_public_ip_on_launch = true
 }
 
-resource "aws_subnet" "public_subnet_2" { 
+resource "aws_subnet" "public_subnet_2" {
   tags = {
     Name = "aws-devops-terraform-public-subnet-2"
   }

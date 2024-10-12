@@ -32,7 +32,7 @@ resource "aws_instance" "test_ec2" {
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.private_subnet_2.id
   vpc_security_group_ids = [aws_security_group.nat_sg.id]
-  key_name = aws_key_pair.ssh_key.key_name
+  key_name               = aws_key_pair.ssh_key.key_name
   tags = {
     Name = "Test Instance"
   }

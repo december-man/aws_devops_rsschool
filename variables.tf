@@ -63,7 +63,7 @@ variable "availability_zones" {
 
 variable "ec2_amazon_linux_ami" {
   description = "EC2 Instance Image for Bastion Host and Testing"
-  default = "ami-0592c673f0b1e7665"
+  default     = "ami-0592c673f0b1e7665"
 }
 
 variable "ssh_pk" {
@@ -73,5 +73,5 @@ variable "ssh_pk" {
 
 variable "ssh_inbound_ip" {
   description = "Specify CIDR block to limit inbound ssh traffic to the NAT Instance/Bastion Host"
-  default     = ["0.0.0.0/0"] 
+  default     = ["0.0.0.0/0"]
 }

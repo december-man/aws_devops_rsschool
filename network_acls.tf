@@ -28,7 +28,7 @@ resource "aws_network_acl_rule" "ingress_ssh" {
   rule_action    = "allow"
   cidr_block     = "0.0.0.0/0"
   from_port      = 22
-  to_port        = 22 
+  to_port        = 22
 }
 
 # Add egress rule to Public ACL to allow all outbound traffic
