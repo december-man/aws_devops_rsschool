@@ -43,3 +43,44 @@ resource "aws_security_group_rule" "egress_any" {
   to_port           = 0
   protocol          = "-1"
 }
+
+# Deploy Security Group for Test Instance
+resource "aws_security_group" "test_ec2_sg" {
+  description = "Security group for Private Instance"
+  vpc_id      = aws_vpc.main_vpc.id
+  name        = "nat_instance_sg"
+  tags = {
+    Name = "Private Instance Security Group"
+  }
+}
+
+# Add Ingress Rules to allow ssh/icmp inbound traffic
+resource "aws_security_group_rule" "ingress_ssh_test" {
+  description       = "Allow inbound SSH traffic to Private Instance from specified IP Range"
+  security_group_id = aws_security_group.test_ec2_sg.id
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+}
+
+resource "aws_security_group_rule" "ingress_icmp_test" {
+  description       = "Allow inbound ICMP (Ping) traffic to Private Instance"
+  security_group_id = aws_security_group.test_ec2_sg.id
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = -1
+  to_port           = -1
+  protocol          = "icmp"
+}
+
+resource "aws_security_group_rule" "egress_any_test" {
+  description       = "Allow any outbound traffic from Private Instance"
+  security_group_id = aws_security_group.test_ec2_sg.id
+  type              = "egress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+}

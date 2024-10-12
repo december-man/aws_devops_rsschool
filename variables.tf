@@ -63,7 +63,7 @@ variable "availability_zones" {
 
 variable "ec2_amazon_linux_ami" {
   description = "EC2 Instance Image for Bastion Host and Testing"
-  default     = "ami-0592c673f0b1e7665"
+  default     = "ami-0e6a13e7a5b66ff4d"
 }
 
 variable "ssh_pk" {
