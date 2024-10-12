@@ -2,9 +2,9 @@
 
 # Deploy EC2 Bastion Host / NAT Instance
 resource "aws_instance" "nat_instance" {
-  ami                    = var.ec2_amazon_linux_ami
-  instance_type          = "t2.micro"
-  key_name               = aws_key_pair.ssh_key.key_name
+  ami           = var.ec2_amazon_linux_ami
+  instance_type = "t2.micro"
+  key_name      = aws_key_pair.ssh_key.key_name
   tags = {
     Name = "Bastion Host / NAT Instance for Kubernetes Infrastructure"
   }
@@ -13,7 +13,7 @@ resource "aws_instance" "nat_instance" {
     device_index         = 0
     network_card_index   = 0
   }
-  user_data = <<-EOF
+  user_data                   = <<-EOF
               #! /bin/bash
               sudo yum install iptables-services -y
               sudo systemctl enable iptables
