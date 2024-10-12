@@ -48,7 +48,7 @@ resource "aws_security_group_rule" "egress_any" {
 resource "aws_security_group" "test_ec2_sg" {
   description = "Security group for Private Instance"
   vpc_id      = aws_vpc.main_vpc.id
-  name        = "nat_instance_sg"
+  name        = "test_instance_sg"
   tags = {
     Name = "Private Instance Security Group"
   }
