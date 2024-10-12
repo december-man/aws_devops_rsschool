@@ -47,6 +47,6 @@ output "test_ec2_public_ip_address" {
   value = aws_instance.test_ec2.public_ip
 }
 
-output "test_ec2_privat_ip_address" {
+output "test_ec2_private_ip_address" {
   value = aws_instance.test_ec2.private_ip
 }
