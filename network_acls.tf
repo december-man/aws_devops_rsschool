@@ -56,9 +56,9 @@ resource "aws_network_acl_rule" "ingress_https" {
 # Allow all inbound traffic
 resource "aws_network_acl_rule" "ingress_allow_all" {
   network_acl_id = aws_network_acl.public_acl.id
-  rule_number    = 200  # Choose a rule number that is higher than existing rules
+  rule_number    = 200 # Choose a rule number that is higher than existing rules
   egress         = false
-  protocol       = "-1"  # -1 means all protocols
+  protocol       = "-1" # -1 means all protocols
   rule_action    = "allow"
   cidr_block     = "0.0.0.0/0"
 }

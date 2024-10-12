@@ -13,7 +13,7 @@ resource "aws_instance" "nat_instance" {
     device_index         = 0
     network_card_index   = 0
   }
-  user_data = <<-EOL
+  user_data                   = <<-EOL
                 #! /bin/bash
                 sudo yum install iptables-services -y
                 sudo systemctl enable iptables
