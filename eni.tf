@@ -6,8 +6,4 @@ resource "aws_network_interface" "nat_interface" {
   subnet_id         = aws_subnet.public_subnet_1.id
   source_dest_check = false
   description       = "ENI for NAT instance"
-  attachment {
-    instance     = aws_instance.nat_instance.id
-    device_index = 0
-  }
 }
