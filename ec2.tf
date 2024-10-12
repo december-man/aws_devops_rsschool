@@ -13,7 +13,7 @@ resource "aws_instance" "nat_instance" {
     device_index         = 0
     network_card_index   = 0
   }
-  user_data = <<-EOL 
+  user_data = <<-EOF 
               #! /bin/bash
               sudo yum install iptables-services -y
               sudo systemctl enable iptables
@@ -21,7 +21,7 @@ resource "aws_instance" "nat_instance" {
               sudo sysctl -w net.ipv4.ip_forward=1
               sudo /sbin/iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
               sudo /sbin/iptables -F FORWARD
-              EOL
+              EOF
   user_data_replace_on_change = true
 }
 
