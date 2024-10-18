@@ -87,20 +87,28 @@
  In order to use this code for your own needs you need to:
 * Manually create your own aws s3 bucket that you will use for terraform backend. Modify the *main.tf/backend* config with your s3 bucket name.
 * Add necessary environment variables (using ```export TF_VAR_X``` syntax for local usage) to GitHub Secrets, they are specified in **terraform.yml** configuration file or you can see them in **variables.tf** - they won't have `default` parameter.
-* To connect to launched instances, I suggest updating ~./ssh/config file with Bastion Host Address as well as other private instances within vpc's private subnets. To reach those you can use the `ProxyJump` parameter in config file (known as `ssh -J`). Here's the configuration I've used (note that all instances are using the same RSA key):
+* To connect to launched instances, I suggest updating ~./ssh/config file with Bastion Host Address as well as other private instances within vpc's private subnets, like k3s' Server & Agent Nodes. To reach those you can use the `ProxyJump` parameter in config file (known as `ssh -J`). Here's the configuration I've used (note that all instances are using the same RSA key):
 
 ``` bash
 ### Configuration for Bastion host (jump host)
 Host Bastion
     HostName 255.255.255.255
     User ec2-user
-    IdentityFile ~/.ssh/aws/your_key.pem
+    IdentityFile ~/.ssh/aws/your_key_rsa
     ForwardAgent yes
 
-### Configuration for connecting to the target private instance via the Bastion host
-Host test_ec2
+### Configuration for connecting to the k3s Server via the Bastion host
+Host k3s_server
     HostName 10.0.0.0
     User ec2-user
-    IdentityFile ~/.ssh/aws/your_key.pem
+    IdentityFile ~/.ssh/aws/your_key_rsa
     ProxyJump Bastion
+
+### Configuration for connecting to the k3s Agent via the Bastion
+Host k3s_agent
+    HostName 10.0.0.0
+    User ec2-user
+    IdentityFile ~/.ssh/aws/your_key_rsa
+    ProxyJump Bastion
+
 ``` 
