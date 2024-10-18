@@ -25,7 +25,7 @@ resource "aws_instance" "nat_instance" {
   user_data_replace_on_change = true
 }
 
-#########################################################################################
+
 # Task 3: k3s Setup
 
 # Create a k3s Server instance in Private subnet #1

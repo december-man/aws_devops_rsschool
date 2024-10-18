@@ -62,7 +62,6 @@ resource "aws_security_group_rule" "egress_any" {
   protocol          = "-1"
 }
 
-#########################################################################################
 # Task 3: k3s Setup
 
 # Deploy Security Group for k3s Server Instance and add all the necessary rules
