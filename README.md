@@ -112,3 +112,12 @@ Host k3s_agent
     ProxyJump Bastion
 
 ``` 
+
+### To access `kubectl` remotely from your local machine, setup a *SOCKS5* proxy:
+ - Make sure you have `kubectl` installed on your local machine
+ - Copy kube config from your k3s server instance to your local machine update it with the k3s Server's private ip address and proxy-url parameter, and finally set `KUBECONFIG` environment variable to its path:
+     * Download the kube config: `ssh k3s_server "cat /etc/rancher/k3s/k3s.yaml" > ~/.kube/k3s.yaml`
+     * Update it: `vi ~/.kube/k3s.yaml`. More on that step can be found [here](https://kubernetes.io/docs/tasks/extend-kubernetes/socks5-proxy-access-api/).
+     * Add `KUBECONFIG` env variable: `export KUBECONFIG=~/.kube/k3s.yaml`
+ - Run `ssh -D 1080 -N -q Bastion` in a separate terminal (This will launch a SOCKS5 Proxy through your Bastion Host)
+ - Run `kubectl get nodes` to check.
