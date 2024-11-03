@@ -31,13 +31,16 @@ resource "aws_instance" "nat_instance" {
 # Create a k3s Server instance in Private subnet #1
 resource "aws_instance" "k3s_server" {
   ami                    = var.ec2_amazon_linux_ami
-  instance_type          = "t2.micro"
+  instance_type          = "t2.small"
   subnet_id              = aws_subnet.private_subnet_1.id
   vpc_security_group_ids = [aws_security_group.k3s_server_sg.id]
   key_name               = aws_key_pair.ssh_key.key_name
   tags = {
     Name = "k3s Server Instance"
   }
+  user_data = templatefile("k3s_server.sh", {
+    token = var.token
+  })
 }
 
 # Create a k3s Agent instance in Private subnet #2
@@ -50,4 +53,9 @@ resource "aws_instance" "k3s_agent" {
   tags = {
     Name = "K3s Agent Instance"
   }
+  depends_on = [aws_instance.k3s_server]
+  user_data = templatefile("k3s_agent.sh", {
+    token       = var.token,
+    server_addr = aws_instance.k3s_server.private_ip
+  })
 }

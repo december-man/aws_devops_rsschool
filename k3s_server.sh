@@ -14,8 +14,3 @@ sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 sudo chmod 600 ~/.kube/config
 echo 'export KUBECONFIG=~/.kube/config' >> ~/.bashrc
 source ~/.bashrc
-
-# Add user_data param to aws_instance "k3s_server"
-#  user_data = templatefile("k3s_server.sh", {
-#    token = var.token
-#  })
