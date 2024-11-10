@@ -1,9 +1,7 @@
 name: Terraform
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
 env:
   TF_VAR_token: ${{ vars.TOKEN }}
