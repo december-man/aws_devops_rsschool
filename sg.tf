@@ -21,6 +21,17 @@ resource "aws_security_group_rule" "ingress_ssh" {
   protocol          = "tcp"
 }
 
+# Add Ingress Rules to allow http inbound traffic for reverse-proxy setup
+resource "aws_security_group_rule" "ingress_http" {
+  description       = "Allow inbound HTTP traffic to NAT Instance / Bastion Host from specified IP Range"
+  security_group_id = aws_security_group.nat_sg.id
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+}
+
 resource "aws_security_group_rule" "ingress_icmp" {
   description       = "Allow inbound ICMP (Ping) traffic to NAT Instance / Bastion Host"
   security_group_id = aws_security_group.nat_sg.id
