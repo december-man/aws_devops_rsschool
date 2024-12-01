@@ -18,7 +18,7 @@ sudo echo 'server {
         server_name localhost 127.0.0.1;
         # Jenkins
         location / {
-          proxy_pass         http://10.0.3.129:32000;
+          proxy_pass         http://10.0.3.58:32000;
           proxy_redirect     off;
           proxy_set_header   Host $host;
           proxy_set_header   X-Real-IP $remote_addr;

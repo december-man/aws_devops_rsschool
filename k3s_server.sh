@@ -8,13 +8,12 @@ sudo yum install selinux-policy-targeted -y
 curl -sfL https://get.k3s.io | K3S_TOKEN=${token} sh -s -
 
 # Configure kubeconfig for non-root access
-sudo ln -s /usr/local/bin/k3s /usr/bin/k3s
 mkdir -p /home/ec2-user/.kube
 sudo cp /etc/rancher/k3s/k3s.yaml /home/ec2-user/.kube/config
 sudo chown ec2-user:ec2-user /home/ec2-user/.kube/config
 sudo chmod 600 /home/ec2-user/.kube/config
-echo 'export KUBECONFIG=/home/ec2-user/.kube/config' >> /home/ec2-user/.bashrc
-source /home/ec2-user/.bashrc
+export KUBECONFIG=/home/ec2-user/.kube/config
+sudo ln -s /usr/local/bin/k3s /usr/bin/k3s
 
 # Install Telnet
 sudo yum install telnet -y
