@@ -13,7 +13,8 @@ sudo cp /etc/rancher/k3s/k3s.yaml /home/ec2-user/.kube/config
 sudo chown ec2-user:ec2-user /home/ec2-user/.kube/config
 sudo chmod 600 /home/ec2-user/.kube/config
 sudo ln -s /usr/local/bin/k3s /usr/bin/k3s
-export KUBECONFIG="/home/ec2-user/.kube/config"
+echo 'export KUBECONFIG="/home/ec2-user/.kube/config"' >> /home/ec2-user/.bashrc
+source /home/ec2-user/.bashrc
 
 # Install Telnet
 sudo yum install telnet -y

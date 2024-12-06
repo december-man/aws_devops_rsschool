@@ -17,8 +17,8 @@ sudo echo 'server {
         listen 80;
         server_name localhost 127.0.0.1;
         location / {
-          proxy_pass         http://10.0.3.58:32000;
-          proxy_redirect     http://10.0.3.58:32000/ /;
+          proxy_pass         http://10.0.3.58:32001;
+          proxy_redirect     http://10.0.3.58:32001/ /;
           proxy_set_header   Host $host;
           proxy_set_header   X-Real-IP $remote_addr;
           proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -26,8 +26,8 @@ sudo echo 'server {
         }
         # Apps
         location /app/ {
-          proxy_pass         http://10.0.3.58:32001/;
-          proxy_redirect     http://10.0.3.58:32001/ /app/;
+          proxy_pass         http://10.0.3.58:32000/;
+          proxy_redirect     http://10.0.3.58:32000/ /app/;
           proxy_set_header   Host $host;
           proxy_set_header   X-Real-IP $remote_addr;
           proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
