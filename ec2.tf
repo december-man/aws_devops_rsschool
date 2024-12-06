@@ -38,7 +38,7 @@ resource "aws_instance" "k3s_server" {
 # Create a k3s Agent instance in Private subnet #2
 resource "aws_instance" "k3s_agent" {
   ami                    = var.ec2_amazon_linux_ami
-  instance_type          = "t2.micro"
+  instance_type          = "t2.small"
   subnet_id              = aws_subnet.private_subnet_2.id
   private_ip             = "10.0.4.7"
   vpc_security_group_ids = [aws_security_group.k3s_agent_sg.id]
