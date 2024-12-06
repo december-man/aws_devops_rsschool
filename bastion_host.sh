@@ -24,6 +24,15 @@ sudo echo 'server {
           proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header   X-Forwarded-Host $server_name;
         }
+        # Apps
+        location /app/ {
+          proxy_pass         http://10.0.3.58:32001/;
+          proxy_redirect     http://10.0.3.58:32001/ /app/;
+          proxy_set_header   Host $host;
+          proxy_set_header   X-Real-IP $remote_addr;
+          proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header   X-Forwarded-Host $server_name;
+        }
     }' >> /etc/nginx/conf.d/proxy.conf
 sudo service nginx restart
 # Accept inbound connections on port 80

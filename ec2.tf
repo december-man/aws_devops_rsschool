@@ -24,6 +24,7 @@ resource "aws_instance" "k3s_server" {
   ami                    = var.ec2_amazon_linux_ami
   instance_type          = "t2.small"
   subnet_id              = aws_subnet.private_subnet_1.id
+  private_ip             = "10.0.3.58"
   vpc_security_group_ids = [aws_security_group.k3s_server_sg.id]
   key_name               = aws_key_pair.ssh_key.key_name
   tags = {
@@ -39,6 +40,7 @@ resource "aws_instance" "k3s_agent" {
   ami                    = var.ec2_amazon_linux_ami
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.private_subnet_2.id
+  private_ip             = "10.0.4.7"
   vpc_security_group_ids = [aws_security_group.k3s_agent_sg.id]
   key_name               = aws_key_pair.ssh_key.key_name
   tags = {
