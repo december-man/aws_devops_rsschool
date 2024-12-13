@@ -16,8 +16,10 @@ sudo ln -s /usr/local/bin/k3s /usr/bin/k3s
 echo 'export KUBECONFIG="/home/ec2-user/.kube/config"' >> /home/ec2-user/.bashrc
 source /home/ec2-user/.bashrc
 
-# Install Telnet
+# Install Additional Packages
 sudo yum install telnet -y
+sudo amazon-linux-extras install epel -y --nogpgcheck
+sudo yum install stress -y
 
 # Install Helm
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
