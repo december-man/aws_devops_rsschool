@@ -1,3 +1,8 @@
+## [AWS DevOps @ RS.SCHOOL] Welcome to the course's Infrastructure repository!
+
+### Infrastructure Schema:
+![](https://raw.githubusercontent.com/december-man/rsschool-devops-course-software/main/screenshots/task_4/aws_devops_t4.png)
+
 ### Project Structure:
 ``` bash
 ├── .github
